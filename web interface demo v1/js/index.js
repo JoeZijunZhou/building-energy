@@ -16,11 +16,11 @@ var bindDateRangeValidation = function (f, s, e) {
     if(!(f instanceof jQuery)){
 			console.log("Not passing a jQuery object");
     }
-  
+
     var jqForm = f,
         startDateId = s,
         endDateId = e;
-  
+
     var checkDateRange = function (startDate, endDate) {
         var isValid = (startDate != "" && endDate != "") ? startDate <= endDate : true;
         return isValid;
@@ -59,13 +59,13 @@ var bindDateRangeValidation = function (f, s, e) {
         }
         if (!bstpValidate) {
             jqForm.bootstrapValidator({
-                excluded: [':disabled'], 
+                excluded: [':disabled'],
             })
         }
-      
+
         jqForm.bootstrapValidator('addField', startDateId, validateFields.startDate);
         jqForm.bootstrapValidator('addField', endDateId, validateFields.endDate);
-      
+
     };
 
     var hookValidatorEvt = function () {
@@ -89,22 +89,22 @@ var bindDateRangeValidation = function (f, s, e) {
 };
 
 
-// baseline1 period --JQuery
+//baseline1 period --JQuery
 $(function () {
-    var sd = new Date(), ed = new Date();
-  
-    $('#startDate').datetimepicker({ 
-      pickTime: false, 
-      format: "YYYY/MM/DD", 
-      defaultDate: sd, 
-      maxDate: ed 
+    var sd = new Date(2015, 0, 1), ed = new Date(2015, 5, 30);
+
+    $('#startDate').datetimepicker({
+      pickTime: false,
+      format: "YYYY/MM/DD",
+      defaultDate: sd,
+      maxDate: ed
     });
-  
-    $('#endDate').datetimepicker({ 
-      pickTime: false, 
-      format: "YYYY/MM/DD", 
-      defaultDate: ed, 
-      minDate: sd 
+
+    $('#endDate').datetimepicker({
+      pickTime: false,
+      format: "YYYY/MM/DD",
+      defaultDate: ed,
+      minDate: sd
     });
 
     //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
@@ -114,20 +114,20 @@ $(function () {
 
 // baseline2 period --JQuery
 $(function () {
-    var sd = new Date(), ed = new Date();
-  
-    $('#startDate2').datetimepicker({ 
-      pickTime: false, 
-      format: "YYYY/MM/DD", 
-      defaultDate: sd, 
-      maxDate: ed 
+    var sd = new Date(2015, 6, 1), ed = new Date(2015, 11, 31);
+
+    $('#startDate2').datetimepicker({
+      pickTime: false,
+      format: "YYYY/MM/DD",
+      defaultDate: sd,
+      maxDate: ed
     });
-  
-    $('#endDate2').datetimepicker({ 
-      pickTime: false, 
-      format: "YYYY/MM/DD", 
-      defaultDate: ed, 
-      minDate: sd 
+
+    $('#endDate2').datetimepicker({
+      pickTime: false,
+      format: "YYYY/MM/DD",
+      defaultDate: ed,
+      minDate: sd
     });
 
     //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
@@ -137,20 +137,20 @@ $(function () {
 
 // evaluation period --JQuery
 $(function () {
-    var sd = new Date(), ed = new Date();
-  
-    $('#startDate3').datetimepicker({ 
-      pickTime: false, 
-      format: "YYYY/MM/DD", 
-      defaultDate: sd, 
-      maxDate: ed 
+    var sd = new Date(2016, 0, 1), ed = new Date(2016, 11, 31);
+
+    $('#startDate3').datetimepicker({
+      pickTime: false,
+      format: "YYYY/MM/DD",
+      defaultDate: sd,
+      maxDate: ed
     });
-  
-    $('#endDate3').datetimepicker({ 
-      pickTime: false, 
-      format: "YYYY/MM/DD", 
-      defaultDate: ed, 
-      minDate: sd 
+
+    $('#endDate3').datetimepicker({
+      pickTime: false,
+      format: "YYYY/MM/DD",
+      defaultDate: ed,
+      minDate: sd
     });
 
     //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
@@ -159,20 +159,20 @@ $(function () {
 
 // Optional --JQuery
 $(function () {
-    var sd = new Date(), ed = new Date();
-  
-    /*$('#startDate4').datetimepicker({ 
-      pickTime: false, 
-      format: "YYYY/MM/DD", 
-      defaultDate: sd, 
-      maxDate: ed 
-    });*/
-  
-    $('#endDate4').datetimepicker({ 
-      pickTime: false, 
-      format: "YYYY/MM/DD", 
-      defaultDate: ed, 
-      minDate: sd 
+    var sd = new Date(2016, 0, 1), ed = new Date(2016, 11, 1);
+
+    $('#startDate4').datetimepicker({
+      pickTime: false,
+      format: "YYYY/MM/DD",
+      defaultDate: sd,
+      maxDate: ed
+    });
+
+    $('#endDate4').datetimepicker({
+      pickTime: false,
+      format: "YYYY/MM/DD",
+      defaultDate: ed,
+      minDate: sd
     });
 
     //passing 1.jquery form object, 2.till date dom Id
@@ -183,4 +183,61 @@ $(function () {
 $( "#sel_val3" ).change(function() {
   var option = $(this).find('option:selected').val();
   $('#sel_txt3').text(option);
+});
+
+var hidden = false;
+$( "#dropdown" ).click(function() {
+  if (!hidden){
+    $(this).parent().parent().siblings().animate({opacity:0}, {start: function(){ $(this).hide(400) }});
+    hidden = true;
+  }
+  else{
+    $(this).parent().parent().siblings().animate({opacity:1}, {start: function(){ $(this).show(400) }});
+    hidden = false;
+  }
+});
+
+var TMYMode = false;
+$("#TMYSwitch").click(function() {
+  if (!TMYMode) {
+    $(this).removeClass("btn-default");
+    $(this).addClass("active");
+    $(this).addClass("btn-primary");
+
+    $(".defaultRow").hide();
+    $(".TMYRow").show();
+
+    TMYMode = true;
+  }
+  else{
+    $(this).removeClass("btn-primary");
+    $(this).removeClass("active");
+    $(this).addClass("btn-default");
+
+    $(".TMYRow").hide();
+    $(".defaultRow").show();
+
+    TMYMode = false;
+  }
+});
+
+//side-bar
+$(document).ready(function(){
+$(".side-bar-button").click(function() {
+  var shown = $(".side-bar").css("opacity");
+
+  if(shown == 0){
+    $(".side-bar").css("opacity", "1");
+    $(".side-bar-button").attr("src","image/cross.png");
+    $(".side-bar-button").css("margin-left", "30vh");
+    //alert("The paragraph was clicked.");
+  }
+  if(shown == 1){
+    $(".side-bar").css("opacity", "0");
+    $(".side-bar-button").attr("src","image/ham.png");
+    $(".side-bar-button").css("margin-left", "5vh");
+    //alert("The paragraph was clicked.");
+  }
+
+});
 });
